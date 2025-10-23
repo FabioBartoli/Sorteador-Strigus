@@ -100,6 +100,7 @@ jobs:
         if: ${{ steps.trivy.outcome == 'success' }}
         env:
           COSIGN_EXPERIMENTAL: "false"
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
         run: |
           cosign version
           cosign sign --key "${COSIGN_KEY_PATH}" "${{ steps.compile.outputs.full_image }}"
