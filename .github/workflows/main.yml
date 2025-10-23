@@ -83,11 +83,19 @@ jobs:
           path: ${{ env.WORKDIR }}/trivy-report.txt
           retention-days: 30
 
+      - name: "Push image to ECR"
+        id: push-ecr
+        if: ${{ steps.trivy.outcome == 'success' }}
+        run: |
+          docker push "${{ steps.compile.outputs.full_image }}"
+
       - name: "Install Cosign"
+        needs: push-ecr
         if: ${{ steps.trivy.outcome == 'success' }}
         uses: sigstore/cosign-installer@v3.4.0
 
       - name: "Prepare Cosign key"
+        needs: push-ecr
         if: ${{ steps.trivy.outcome == 'success' }}
         run: |
           KEY_PATH="${GITHUB_WORKSPACE}/${{ env.WORKDIR }}/cosign.key"
@@ -97,6 +105,7 @@ jobs:
           echo "COSIGN_KEY_PATH=$KEY_PATH" >> "$GITHUB_ENV"
 
       - name: "Cosign - Sign image"
+        needs: push-ecr
         if: ${{ steps.trivy.outcome == 'success' }}
         env:
           COSIGN_EXPERIMENTAL: "false"
@@ -105,7 +114,3 @@ jobs:
           cosign version
           cosign sign --key "${COSIGN_KEY_PATH}" "${{ steps.compile.outputs.full_image }}"
 
-      - name: "Push image to ECR"
-        if: ${{ steps.trivy.outcome == 'success' }}
-        run: |
-          docker push "${{ steps.compile.outputs.full_image }}"
