@@ -18,6 +18,7 @@ jobs:
       COSIGN_KEY: ${{ secrets.COSIGN_KEY }}
       COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
   cd:
+    needs: ci
     uses: FabioBartoli/linuxtips-cicd-reusable/.github/workflows/pipeline-cd.yml@main
     with:
       working-directory: app
