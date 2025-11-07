@@ -21,17 +21,17 @@ spec:
           image: ${IMAGE}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 5000
           readinessProbe:
             httpGet:
               path: /readyz
-              port: 8080
+              port: 5000
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz
-              port: 8080
+              port: 5000
             initialDelaySeconds: 10
             periodSeconds: 15
           resources:
