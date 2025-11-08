@@ -1,4 +1,4 @@
-image: 760337697893.dkr.ecr.us-east-1.amazonaws.com/linuxtips/sorteador-strigus:b95c230fffe5f9609d01f7fe5121a40595d37c19
+image: 760337697893.dkr.ecr.us-east-1.amazonaws.com/linuxtips/sorteador-strigus:d32ffc03ce870cf367ea061780c94bc61bab40fc
 
 replicaCount: 2
 
