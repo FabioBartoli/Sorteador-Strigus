@@ -12,7 +12,7 @@ spec:
     - match:
         - uri:
             prefix: /
-    - headers:
+      headers:
         request:
           set:
             x-forwarded-proto: "https"
