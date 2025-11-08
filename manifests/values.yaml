@@ -4,7 +4,7 @@ replicaCount: 2
 
 container:
   name: "sorteador"
-  port: 8080
+  port: 5000
   imagePullPolicy: IfNotPresent
 
 resources:
@@ -40,7 +40,7 @@ service:
   name: sorteador-service
   type: ClusterIP
   port: 80
-  targetPort: 8080
+  targetPort: 5000
 
 labels:
   app: sorteador
