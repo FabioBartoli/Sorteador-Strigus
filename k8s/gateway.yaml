@@ -7,20 +7,9 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "sorteador-k8s.fabiobartoli.com.br"
-      tls:
-        httpsRedirect: true
-    - port:
-        number: 443
-        name: https
-        protocol: HTTPS
-      hosts:
-        - "sorteador-k8s.fabiobartoli.com.br"
-      tls:
-        mode: SIMPLE
-        credentialName: sorteador-cert
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "sorteador-k8s.fabiobartoli.com.br"
